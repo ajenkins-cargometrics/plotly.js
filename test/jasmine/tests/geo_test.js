@@ -128,7 +128,7 @@ describe('Test Geo layout defaults', function() {
         });
     });
 
-    it('should not coerce projection.parallels if type is conic', function() {
+    it('should only coerce projection.parallels if type is conic', function() {
         var projTypes = layoutAttributes.projection.type.values;
 
         function testOne(projType) {
@@ -460,6 +460,166 @@ describe('Test Geo layout defaults', function() {
                     .toEqual(s.latRange, 'lataxis.range');
                 expect(layoutOut.geo.center.lat)
                     .toEqual(s.centerLat, 'computed center lat');
+            });
+        });
+    });
+
+    fdescribe('should clear attributes that get auto-filled under *fitbounds*', function() {
+        var vals = ['locations', 'geojson'];
+
+        function _assert(exp) {
+            expect(layoutOut.geo.projection.scale).toBe(exp['projection.scale'], 'projection.scale');
+            expect(layoutOut.geo.center.lon).toBe(exp['center.lon'], 'center.lon');
+            expect(layoutOut.geo.center.lat).toBe(exp['center.lat'], 'center.lat');
+            expect(layoutOut.geo.projection.rotation.lon).toBe(exp['projection.rotation.lon'], 'projection.rotation.lon');
+            expect(layoutOut.geo.projection.rotation.lat).toBe(exp['projection.rotation.lat'], 'projection.rotation.lat');
+            expect(layoutOut.geo.lonaxis.range).withContext('lonaxis.range').toEqual(exp['lonaxis.range'], 'lonaxis.range');
+            expect(layoutOut.geo.lataxis.range).withContext('lataxis.range').toEqual(exp['lataxis.range'], 'lataxis.range');
+        }
+
+        describe('- for scoped maps', function() {
+            it('fitbounds:false (base case)', function() {
+                layoutIn = {
+                    geo: {
+                        scope: 'europe',
+                        fitbounds: false
+                    }
+                };
+                supplyLayoutDefaults(layoutIn, layoutOut, fullData);
+                _assert({
+                    'projection.scale': 1,
+                    'center.lon': 15,
+                    'center.lat': 57.5,
+                    'projection.rotation.lon': 15,
+                    'projection.rotation.lat': 0,
+                    'lonaxis.range': [-30, 60],
+                    'lataxis.range': [30, 85]
+                });
+            });
+
+            vals.forEach(function(v) {
+                it('fitbounds:' + v, function() {
+                    layoutIn = {
+                        geo: {
+                            scope: 'europe',
+                            fitbounds: v
+                        }
+                    };
+                    supplyLayoutDefaults(layoutIn, layoutOut, fullData);
+                    _assert({
+                        'projection.scale': undefined,
+                        'center.lon': undefined,
+                        'center.lat': undefined,
+                        'projection.rotation.lon': 15,
+                        'projection.rotation.lat': 0,
+                        'lonaxis.range': [-30, 60],
+                        'lataxis.range': [30, 85]
+                    });
+                });
+            });
+        });
+
+        describe('- for clipped projections', function() {
+            it('fitbounds:false (base case)', function() {
+                layoutIn = {
+                    geo: {
+                        projection: {
+                            type: 'orthographic',
+                            rotation: {lon: 20, lat: 20},
+                            scale: 2
+                        },
+                        fitbounds: false,
+                    }
+                };
+                supplyLayoutDefaults(layoutIn, layoutOut, fullData);
+                _assert({
+                    'projection.scale': 2,
+                    'center.lon': 20,
+                    'center.lat': 20,
+                    'projection.rotation.lon': 20,
+                    'projection.rotation.lat': 20,
+                    'lonaxis.range': [-70, 110],
+                    'lataxis.range': [-70, 110]
+                });
+            });
+
+            vals.forEach(function(v) {
+                it('fitbounds:' + v, function() {
+                    layoutIn = {
+                        geo: {
+                            projection: {
+                                type: 'orthographic',
+                                rotation: {lon: 20, lat: 20},
+                                scale: 2
+                            },
+                            fitbounds: v
+                        }
+                    };
+                    supplyLayoutDefaults(layoutIn, layoutOut, fullData);
+                    _assert({
+                        'projection.scale': undefined,
+                        'center.lon': undefined,
+                        'center.lat': undefined,
+                        'projection.rotation.lon': undefined,
+                        'projection.rotation.lat': undefined,
+                        'lonaxis.range': undefined,
+                        'lataxis.range': undefined
+                    });
+                });
+            });
+        });
+
+        describe('- for non-clipped projections', function() {
+            it('fitbounds:false (base case)', function() {
+                layoutIn = {
+                    geo: {
+                        projection: {
+                            type: 'natural earth',
+                            rotation: {lon: 20},
+                            scale: 2
+                        },
+                        lonaxis: {range: [-90, 90]},
+                        lataxis: {range: [0, 80]},
+                        fitbounds: false,
+                    }
+                };
+                supplyLayoutDefaults(layoutIn, layoutOut, fullData);
+                _assert({
+                    'projection.scale': 2,
+                    'center.lon': 20,
+                    'center.lat': 40,
+                    'projection.rotation.lon': 20,
+                    'projection.rotation.lat': 0,
+                    'lonaxis.range': [-90, 90],
+                    'lataxis.range': [0, 80]
+                });
+            });
+
+            vals.forEach(function(v) {
+                it('fitbounds:' + v, function() {
+                    layoutIn = {
+                        geo: {
+                            projection: {
+                                type: 'natural earth',
+                                rotation: {lon: 20},
+                                scale: 2
+                            },
+                            lonaxis: {range: [-90, 90]},
+                            lataxis: {range: [0, 80]},
+                            fitbounds: v,
+                        }
+                    };
+                    supplyLayoutDefaults(layoutIn, layoutOut, fullData);
+                    _assert({
+                        'projection.scale': undefined,
+                        'center.lon': undefined,
+                        'center.lat': undefined,
+                        'projection.rotation.lon': undefined,
+                        'projection.rotation.lat': 0,
+                        'lonaxis.range': [-90, 90],
+                        'lataxis.range': [0, 80]
+                    });
+                });
             });
         });
     });
@@ -1192,6 +1352,7 @@ describe('Test geo interactions', function() {
             expect(geoLayout.lataxis.range).toEqual([-90, 90]);
 
             expect(geo.viewInitial).toEqual({
+                'fitbounds': false,
                 'projection.rotation.lon': 0,
                 'center.lon': 0,
                 'center.lat': 0,
@@ -1303,6 +1464,7 @@ describe('Test geo interactions', function() {
         Plotly.react(gd, figWorld)
         .then(function() {
             _assertViewInitial('world scope', {
+                'fitbounds': false,
                 'center.lon': 0,
                 'center.lat': 0,
                 'projection.scale': 1,
@@ -1312,6 +1474,7 @@ describe('Test geo interactions', function() {
         .then(function() { return Plotly.react(gd, figUSA); })
         .then(function() {
             _assertViewInitial('react to usa scope', {
+                'fitbounds': false,
                 'center.lon': -96.6,
                 'center.lat': 38.7,
                 'projection.scale': 1
@@ -1320,6 +1483,7 @@ describe('Test geo interactions', function() {
         .then(function() { return Plotly.react(gd, figNA); })
         .then(function() {
             _assertViewInitial('react to NA scope', {
+                'fitbounds': false,
                 'center.lon': -112.5,
                 'center.lat': 45,
                 'projection.scale': 1
@@ -1328,6 +1492,7 @@ describe('Test geo interactions', function() {
         .then(function() { return Plotly.react(gd, figWorld); })
         .then(function() {
             _assertViewInitial('react back to world scope', {
+                'fitbounds': false,
                 'center.lon': 0,
                 'center.lat': 0,
                 'projection.scale': 1,
@@ -1390,6 +1555,8 @@ describe('Test geo interactions', function() {
             .catch(failTest)
             .then(done);
         });
+
+        // TODO add test for scope:'none'
     });
 });
 
