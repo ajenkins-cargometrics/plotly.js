@@ -1,10 +1,10 @@
 /**
-* Copyright 2012-2020, Plotly, Inc.
-* All rights reserved.
-*
-* This source code is licensed under the MIT license found in the
-* LICENSE file in the root directory of this source tree.
-*/
+ * Copyright 2012-2020, Plotly, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 
 'use strict';
@@ -22,7 +22,7 @@ var d3 = require('d3');
 module.exports = {
     circle: {
         n: 0,
-        f: function(r) {
+        f: function (r) {
             var rs = d3.round(r, 2);
             return 'M' + rs + ',0A' + rs + ',' + rs + ' 0 1,1 0,-' + rs +
                 'A' + rs + ',' + rs + ' 0 0,1 ' + rs + ',0Z';
@@ -30,21 +30,21 @@ module.exports = {
     },
     square: {
         n: 1,
-        f: function(r) {
+        f: function (r) {
             var rs = d3.round(r, 2);
             return 'M' + rs + ',' + rs + 'H-' + rs + 'V-' + rs + 'H' + rs + 'Z';
         }
     },
     diamond: {
         n: 2,
-        f: function(r) {
+        f: function (r) {
             var rd = d3.round(r * 1.3, 2);
             return 'M' + rd + ',0L0,' + rd + 'L-' + rd + ',0L0,-' + rd + 'Z';
         }
     },
     cross: {
         n: 3,
-        f: function(r) {
+        f: function (r) {
             var rc = d3.round(r * 0.4, 2);
             var rc2 = d3.round(r * 1.2, 2);
             return 'M' + rc2 + ',' + rc + 'H' + rc + 'V' + rc2 + 'H-' + rc +
@@ -54,7 +54,7 @@ module.exports = {
     },
     x: {
         n: 4,
-        f: function(r) {
+        f: function (r) {
             var rx = d3.round(r * 0.8 / Math.sqrt(2), 2);
             var ne = 'l' + rx + ',' + rx;
             var se = 'l' + rx + ',-' + rx;
@@ -65,7 +65,7 @@ module.exports = {
     },
     'triangle-up': {
         n: 5,
-        f: function(r) {
+        f: function (r) {
             var rt = d3.round(r * 2 / Math.sqrt(3), 2);
             var r2 = d3.round(r / 2, 2);
             var rs = d3.round(r, 2);
@@ -74,7 +74,7 @@ module.exports = {
     },
     'triangle-down': {
         n: 6,
-        f: function(r) {
+        f: function (r) {
             var rt = d3.round(r * 2 / Math.sqrt(3), 2);
             var r2 = d3.round(r / 2, 2);
             var rs = d3.round(r, 2);
@@ -83,7 +83,7 @@ module.exports = {
     },
     'triangle-left': {
         n: 7,
-        f: function(r) {
+        f: function (r) {
             var rt = d3.round(r * 2 / Math.sqrt(3), 2);
             var r2 = d3.round(r / 2, 2);
             var rs = d3.round(r, 2);
@@ -92,7 +92,7 @@ module.exports = {
     },
     'triangle-right': {
         n: 8,
-        f: function(r) {
+        f: function (r) {
             var rt = d3.round(r * 2 / Math.sqrt(3), 2);
             var r2 = d3.round(r / 2, 2);
             var rs = d3.round(r, 2);
@@ -101,7 +101,7 @@ module.exports = {
     },
     'triangle-ne': {
         n: 9,
-        f: function(r) {
+        f: function (r) {
             var r1 = d3.round(r * 0.6, 2);
             var r2 = d3.round(r * 1.2, 2);
             return 'M-' + r2 + ',-' + r1 + 'H' + r1 + 'V' + r2 + 'Z';
@@ -109,7 +109,7 @@ module.exports = {
     },
     'triangle-se': {
         n: 10,
-        f: function(r) {
+        f: function (r) {
             var r1 = d3.round(r * 0.6, 2);
             var r2 = d3.round(r * 1.2, 2);
             return 'M' + r1 + ',-' + r2 + 'V' + r1 + 'H-' + r2 + 'Z';
@@ -117,7 +117,7 @@ module.exports = {
     },
     'triangle-sw': {
         n: 11,
-        f: function(r) {
+        f: function (r) {
             var r1 = d3.round(r * 0.6, 2);
             var r2 = d3.round(r * 1.2, 2);
             return 'M' + r2 + ',' + r1 + 'H-' + r1 + 'V-' + r2 + 'Z';
@@ -125,7 +125,7 @@ module.exports = {
     },
     'triangle-nw': {
         n: 12,
-        f: function(r) {
+        f: function (r) {
             var r1 = d3.round(r * 0.6, 2);
             var r2 = d3.round(r * 1.2, 2);
             return 'M-' + r1 + ',' + r2 + 'V-' + r1 + 'H' + r2 + 'Z';
@@ -133,7 +133,7 @@ module.exports = {
     },
     pentagon: {
         n: 13,
-        f: function(r) {
+        f: function (r) {
             var x1 = d3.round(r * 0.951, 2);
             var x2 = d3.round(r * 0.588, 2);
             var y0 = d3.round(-r, 2);
@@ -145,7 +145,7 @@ module.exports = {
     },
     hexagon: {
         n: 14,
-        f: function(r) {
+        f: function (r) {
             var y0 = d3.round(r, 2);
             var y1 = d3.round(r / 2, 2);
             var x = d3.round(r * Math.sqrt(3) / 2, 2);
@@ -155,7 +155,7 @@ module.exports = {
     },
     hexagon2: {
         n: 15,
-        f: function(r) {
+        f: function (r) {
             var x0 = d3.round(r, 2);
             var x1 = d3.round(r / 2, 2);
             var y = d3.round(r * Math.sqrt(3) / 2, 2);
@@ -165,7 +165,7 @@ module.exports = {
     },
     octagon: {
         n: 16,
-        f: function(r) {
+        f: function (r) {
             var a = d3.round(r * 0.924, 2);
             var b = d3.round(r * 0.383, 2);
             return 'M-' + b + ',-' + a + 'H' + b + 'L' + a + ',-' + b + 'V' + b +
@@ -174,7 +174,7 @@ module.exports = {
     },
     star: {
         n: 17,
-        f: function(r) {
+        f: function (r) {
             var rs = r * 1.4;
             var x1 = d3.round(rs * 0.225, 2);
             var x2 = d3.round(rs * 0.951, 2);
@@ -193,7 +193,7 @@ module.exports = {
     },
     hexagram: {
         n: 18,
-        f: function(r) {
+        f: function (r) {
             var y = d3.round(r * 0.66, 2);
             var x1 = d3.round(r * 0.38, 2);
             var x2 = d3.round(r * 0.76, 2);
@@ -205,7 +205,7 @@ module.exports = {
     },
     'star-triangle-up': {
         n: 19,
-        f: function(r) {
+        f: function (r) {
             var x = d3.round(r * Math.sqrt(3) * 0.8, 2);
             var y1 = d3.round(r * 0.8, 2);
             var y2 = d3.round(r * 1.6, 2);
@@ -217,7 +217,7 @@ module.exports = {
     },
     'star-triangle-down': {
         n: 20,
-        f: function(r) {
+        f: function (r) {
             var x = d3.round(r * Math.sqrt(3) * 0.8, 2);
             var y1 = d3.round(r * 0.8, 2);
             var y2 = d3.round(r * 1.6, 2);
@@ -229,7 +229,7 @@ module.exports = {
     },
     'star-square': {
         n: 21,
-        f: function(r) {
+        f: function (r) {
             var rp = d3.round(r * 1.1, 2);
             var rc = d3.round(r * 2, 2);
             var aPart = 'A ' + rc + ',' + rc + ' 0 0 1 ';
@@ -240,7 +240,7 @@ module.exports = {
     },
     'star-diamond': {
         n: 22,
-        f: function(r) {
+        f: function (r) {
             var rp = d3.round(r * 1.4, 2);
             var rc = d3.round(r * 1.9, 2);
             var aPart = 'A ' + rc + ',' + rc + ' 0 0 1 ';
@@ -251,7 +251,7 @@ module.exports = {
     },
     'diamond-tall': {
         n: 23,
-        f: function(r) {
+        f: function (r) {
             var x = d3.round(r * 0.7, 2);
             var y = d3.round(r * 1.4, 2);
             return 'M0,' + y + 'L' + x + ',0L0,-' + y + 'L-' + x + ',0Z';
@@ -259,7 +259,7 @@ module.exports = {
     },
     'diamond-wide': {
         n: 24,
-        f: function(r) {
+        f: function (r) {
             var x = d3.round(r * 1.4, 2);
             var y = d3.round(r * 0.7, 2);
             return 'M0,' + y + 'L' + x + ',0L0,-' + y + 'L-' + x + ',0Z';
@@ -267,7 +267,7 @@ module.exports = {
     },
     hourglass: {
         n: 25,
-        f: function(r) {
+        f: function (r) {
             var rs = d3.round(r, 2);
             return 'M' + rs + ',' + rs + 'H-' + rs + 'L' + rs + ',-' + rs + 'H-' + rs + 'Z';
         },
@@ -275,7 +275,7 @@ module.exports = {
     },
     bowtie: {
         n: 26,
-        f: function(r) {
+        f: function (r) {
             var rs = d3.round(r, 2);
             return 'M' + rs + ',' + rs + 'V-' + rs + 'L-' + rs + ',' + rs + 'V-' + rs + 'Z';
         },
@@ -283,7 +283,7 @@ module.exports = {
     },
     'circle-cross': {
         n: 27,
-        f: function(r) {
+        f: function (r) {
             var rs = d3.round(r, 2);
             return 'M0,' + rs + 'V-' + rs + 'M' + rs + ',0H-' + rs +
                 'M' + rs + ',0A' + rs + ',' + rs + ' 0 1,1 0,-' + rs +
@@ -294,7 +294,7 @@ module.exports = {
     },
     'circle-x': {
         n: 28,
-        f: function(r) {
+        f: function (r) {
             var rs = d3.round(r, 2);
             var rc = d3.round(r / Math.sqrt(2), 2);
             return 'M' + rc + ',' + rc + 'L-' + rc + ',-' + rc +
@@ -307,7 +307,7 @@ module.exports = {
     },
     'square-cross': {
         n: 29,
-        f: function(r) {
+        f: function (r) {
             var rs = d3.round(r, 2);
             return 'M0,' + rs + 'V-' + rs + 'M' + rs + ',0H-' + rs +
                 'M' + rs + ',' + rs + 'H-' + rs + 'V-' + rs + 'H' + rs + 'Z';
@@ -317,7 +317,7 @@ module.exports = {
     },
     'square-x': {
         n: 30,
-        f: function(r) {
+        f: function (r) {
             var rs = d3.round(r, 2);
             return 'M' + rs + ',' + rs + 'L-' + rs + ',-' + rs +
                 'M' + rs + ',-' + rs + 'L-' + rs + ',' + rs +
@@ -328,7 +328,7 @@ module.exports = {
     },
     'diamond-cross': {
         n: 31,
-        f: function(r) {
+        f: function (r) {
             var rd = d3.round(r * 1.3, 2);
             return 'M' + rd + ',0L0,' + rd + 'L-' + rd + ',0L0,-' + rd + 'Z' +
                 'M0,-' + rd + 'V' + rd + 'M-' + rd + ',0H' + rd;
@@ -338,7 +338,7 @@ module.exports = {
     },
     'diamond-x': {
         n: 32,
-        f: function(r) {
+        f: function (r) {
             var rd = d3.round(r * 1.3, 2);
             var r2 = d3.round(r * 0.65, 2);
             return 'M' + rd + ',0L0,' + rd + 'L-' + rd + ',0L0,-' + rd + 'Z' +
@@ -350,7 +350,7 @@ module.exports = {
     },
     'cross-thin': {
         n: 33,
-        f: function(r) {
+        f: function (r) {
             var rc = d3.round(r * 1.4, 2);
             return 'M0,' + rc + 'V-' + rc + 'M' + rc + ',0H-' + rc;
         },
@@ -360,7 +360,7 @@ module.exports = {
     },
     'x-thin': {
         n: 34,
-        f: function(r) {
+        f: function (r) {
             var rx = d3.round(r, 2);
             return 'M' + rx + ',' + rx + 'L-' + rx + ',-' + rx +
                 'M' + rx + ',-' + rx + 'L-' + rx + ',' + rx;
@@ -371,7 +371,7 @@ module.exports = {
     },
     asterisk: {
         n: 35,
-        f: function(r) {
+        f: function (r) {
             var rc = d3.round(r * 1.2, 2);
             var rs = d3.round(r * 0.85, 2);
             return 'M0,' + rc + 'V-' + rc + 'M' + rc + ',0H-' + rc +
@@ -384,7 +384,7 @@ module.exports = {
     },
     hash: {
         n: 36,
-        f: function(r) {
+        f: function (r) {
             var r1 = d3.round(r / 2, 2);
             var r2 = d3.round(r, 2);
             return 'M' + r1 + ',' + r2 + 'V-' + r2 +
@@ -397,7 +397,7 @@ module.exports = {
     },
     'y-up': {
         n: 37,
-        f: function(r) {
+        f: function (r) {
             var x = d3.round(r * 1.2, 2);
             var y0 = d3.round(r * 1.6, 2);
             var y1 = d3.round(r * 0.8, 2);
@@ -409,7 +409,7 @@ module.exports = {
     },
     'y-down': {
         n: 38,
-        f: function(r) {
+        f: function (r) {
             var x = d3.round(r * 1.2, 2);
             var y0 = d3.round(r * 1.6, 2);
             var y1 = d3.round(r * 0.8, 2);
@@ -421,7 +421,7 @@ module.exports = {
     },
     'y-left': {
         n: 39,
-        f: function(r) {
+        f: function (r) {
             var y = d3.round(r * 1.2, 2);
             var x0 = d3.round(r * 1.6, 2);
             var x1 = d3.round(r * 0.8, 2);
@@ -433,7 +433,7 @@ module.exports = {
     },
     'y-right': {
         n: 40,
-        f: function(r) {
+        f: function (r) {
             var y = d3.round(r * 1.2, 2);
             var x0 = d3.round(r * 1.6, 2);
             var x1 = d3.round(r * 0.8, 2);
@@ -445,7 +445,7 @@ module.exports = {
     },
     'line-ew': {
         n: 41,
-        f: function(r) {
+        f: function (r) {
             var rc = d3.round(r * 1.4, 2);
             return 'M' + rc + ',0H-' + rc;
         },
@@ -455,7 +455,7 @@ module.exports = {
     },
     'line-ns': {
         n: 42,
-        f: function(r) {
+        f: function (r) {
             var rc = d3.round(r * 1.4, 2);
             return 'M0,' + rc + 'V-' + rc;
         },
@@ -465,7 +465,7 @@ module.exports = {
     },
     'line-ne': {
         n: 43,
-        f: function(r) {
+        f: function (r) {
             var rx = d3.round(r, 2);
             return 'M' + rx + ',-' + rx + 'L-' + rx + ',' + rx;
         },
@@ -475,7 +475,7 @@ module.exports = {
     },
     'line-nw': {
         n: 44,
-        f: function(r) {
+        f: function (r) {
             var rx = d3.round(r, 2);
             return 'M' + rx + ',' + rx + 'L-' + rx + ',-' + rx;
         },
@@ -485,7 +485,7 @@ module.exports = {
     },
     'arrow-up': {
         n: 45,
-        f: function(r) {
+        f: function (r) {
             var rx = d3.round(r, 2);
             var ry = d3.round(r * 2, 2);
             return 'M0,0L-' + rx + ',' + ry + 'H' + rx + 'Z';
@@ -494,7 +494,7 @@ module.exports = {
     },
     'arrow-down': {
         n: 46,
-        f: function(r) {
+        f: function (r) {
             var rx = d3.round(r, 2);
             var ry = d3.round(r * 2, 2);
             return 'M0,0L-' + rx + ',-' + ry + 'H' + rx + 'Z';
@@ -503,7 +503,7 @@ module.exports = {
     },
     'arrow-left': {
         n: 47,
-        f: function(r) {
+        f: function (r) {
             var rx = d3.round(r * 2, 2);
             var ry = d3.round(r, 2);
             return 'M0,0L' + rx + ',-' + ry + 'V' + ry + 'Z';
@@ -512,7 +512,7 @@ module.exports = {
     },
     'arrow-right': {
         n: 48,
-        f: function(r) {
+        f: function (r) {
             var rx = d3.round(r * 2, 2);
             var ry = d3.round(r, 2);
             return 'M0,0L-' + rx + ',-' + ry + 'V' + ry + 'Z';
@@ -521,7 +521,7 @@ module.exports = {
     },
     'arrow-bar-up': {
         n: 49,
-        f: function(r) {
+        f: function (r) {
             var rx = d3.round(r, 2);
             var ry = d3.round(r * 2, 2);
             return 'M-' + rx + ',0H' + rx + 'M0,0L-' + rx + ',' + ry + 'H' + rx + 'Z';
@@ -531,7 +531,7 @@ module.exports = {
     },
     'arrow-bar-down': {
         n: 50,
-        f: function(r) {
+        f: function (r) {
             var rx = d3.round(r, 2);
             var ry = d3.round(r * 2, 2);
             return 'M-' + rx + ',0H' + rx + 'M0,0L-' + rx + ',-' + ry + 'H' + rx + 'Z';
@@ -541,7 +541,7 @@ module.exports = {
     },
     'arrow-bar-left': {
         n: 51,
-        f: function(r) {
+        f: function (r) {
             var rx = d3.round(r * 2, 2);
             var ry = d3.round(r, 2);
             return 'M0,-' + ry + 'V' + ry + 'M0,0L' + rx + ',-' + ry + 'V' + ry + 'Z';
@@ -551,7 +551,7 @@ module.exports = {
     },
     'arrow-bar-right': {
         n: 52,
-        f: function(r) {
+        f: function (r) {
             var rx = d3.round(r * 2, 2);
             var ry = d3.round(r, 2);
             return 'M0,-' + ry + 'V' + ry + 'M0,0L-' + rx + ',-' + ry + 'V' + ry + 'Z';
@@ -560,3 +560,61 @@ module.exports = {
         noDot: true
     }
 };
+
+// add custom symbols to represent ships
+
+function genArrowFunc (degrees) {
+    // assume arrow is pointing up
+    var width = 0.5;  // width of arrow head / 2
+    var base = 0.5; // distance below centerline of base of arrow head
+    var shaftWidth = 0.1;  // width of arrow shaft / 2
+
+    var arrowPoints = [
+        [0, -1], // M
+        [width, base], // L
+        [shaftWidth, base], // H
+        [shaftWidth, 1], // V
+        [-shaftWidth, 1], // H
+        [-shaftWidth, base], // V
+        [-width, base]
+    ];
+
+    // convert degrees to radians
+    var rad = degrees * Math.PI / 180;
+    var sr = Math.sin(rad);
+    var cr = Math.cos(rad);
+
+    // rotate points
+    var points = arrowPoints.map(function (p) {
+        return [
+            p[0] * cr - p[1] * sr,
+            p[0] * sr + p[1] * cr];
+    });
+
+    function genArrowPath (radius) {
+        var scaled = points.map(function (p) {
+            return d3.round(p[0] * radius, 2) + ' ' + d3.round(p[1] * radius, 2);
+        });
+        return 'M ' + scaled[0] + 'L ' + scaled.slice(1).join(' ') + ' Z';
+    }
+
+    return genArrowPath;
+}
+
+(function () {
+    var nextId = Math.max.apply(null, Object.values(module.exports).map(function (cfg) {
+        return cfg.n;
+    })) + 1;
+
+    var directions = ['up', 'nne', 'ne', 'ene', 'right', 'ese', 'se', 'sse', 'down', 'ssw', 'sw', 'wsw', 'left', 'wnw',
+        'nw', 'nnw'];
+    var orient = 0;
+
+    for (var i = 0; i < directions.length; i++) {
+        var name = 'pointer-' + directions[i];
+        module.exports[name] = {
+            n: nextId + i,
+            f: genArrowFunc(orient + i * 22.5)
+        };
+    }
+})();
